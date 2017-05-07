@@ -27,10 +27,10 @@ var _user$project$App$Model = F9(
 		return {username: a, password: b, email: c, phno: d, role: e, tags: f, errorMsg: g, screen: h, checkout: i};
 	});
 var _user$project$App$init = A9(_user$project$App$Model, 'Ajay', '1234', '', '', '', '', '', '1', '');
-var _user$project$App$user1 = A9(_user$project$App$Model, 'Ajay', '1234', 'ajay@gmail.com', '789654123', 'teacher', 'java, c, c++', '', '1', '');
-var _user$project$App$user2 = A9(_user$project$App$Model, 'Jeorge', '1234', 'jeorge@gmail.com', '789654123', 'seeker', 'java', '', '1', '');
-var _user$project$App$user3 = A9(_user$project$App$Model, 'Hussain', '1234', 'hussain@gmail.com', '789654123', 'teacher', 'javascript, html', '', '1', '');
-var _user$project$App$user4 = A9(_user$project$App$Model, 'Javed', '1234', 'javed@gmail.com', '789654123', 'teacher', 'python', '', '1', '');
+var _user$project$App$user1 = A9(_user$project$App$Model, 'Ajay', '1234', 'ajay@gmail.com', '+91789654123', 'teacher', 'java, c, c++', '', '1', '');
+var _user$project$App$user2 = A9(_user$project$App$Model, 'Jeorge', '1234', 'jeorge@gmail.com', '+91789654123', 'seeker', 'java', '', '1', '');
+var _user$project$App$user3 = A9(_user$project$App$Model, 'Hussain', '1234', 'hussain@gmail.com', '+91789654123', 'teacher', 'javascript, html', '', '1', '');
+var _user$project$App$user4 = A9(_user$project$App$Model, 'Javed', '1234', 'javed@gmail.com', '+918892585434', 'teacher', 'python', '', '1', '');
 var _user$project$App$userList = {
 	ctor: '::',
 	_0: _user$project$App$user1,

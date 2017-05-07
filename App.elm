@@ -40,10 +40,10 @@ init =
     Model "Ajay" "1234" "" "" "" "" "" "1" ""
 
 -- Array of users
-user1 = Model "Ajay" "1234" "ajay@gmail.com" "789654123" "teacher" "java, c, c++" "" "1" ""
-user2 = Model "Jeorge" "1234" "jeorge@gmail.com" "789654123" "seeker" "java" "" "1" ""
-user3 = Model "Hussain" "1234" "hussain@gmail.com" "789654123" "teacher" "javascript, html" "" "1" ""
-user4 = Model "Javed" "1234" "javed@gmail.com" "789654123" "teacher" "python" "" "1" ""
+user1 = Model "Ajay" "1234" "ajay@gmail.com" "+91789654123" "teacher" "java, c, c++" "" "1" ""
+user2 = Model "Jeorge" "1234" "jeorge@gmail.com" "+91789654123" "seeker" "java" "" "1" ""
+user3 = Model "Hussain" "1234" "hussain@gmail.com" "+91789654123" "teacher" "javascript, html" "" "1" ""
+user4 = Model "Javed" "1234" "javed@gmail.com" "+918892585434" "teacher" "python" "" "1" ""
 
 userList = [user1, user2, user3, user4]
 
