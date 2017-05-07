@@ -1,0 +1,28 @@
+<dom-module id="map-wrapper">
+  <template>
+    <style>
+    </style>
+    <google-map id="myMap" latitude="[[latitude]]" longitude="[[longitude]]" api-key="AIzaSyA7k_33Pr4ck78dNRhyDZQMxL7kCToO14w" drag-events="true">
+    </google-map>
+  </template>
+  <script>
+    Polymer({
+      is: 'map-wrapper',
+      properties: {
+         latitude: {
+            type: String,
+            reflectToAttribute: true
+         },
+         longitude: {
+            type: String,
+            reflectToAttribute: true
+         },
+      },
+      ready: function() {
+        this.$.myMap.addEventListener('google-map-drag', function(e) {
+          this.fire('map-moved', {latitude: e.target.latitude, longitude: e.target.longitude});
+        });
+      }
+    });
+  </script>
+</dom-module>

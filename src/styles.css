@@ -17,3 +17,12 @@ blockquote {
 .jumbotron .help-block {
     font-size: 14px;
 }
+
+table {
+	max-width: 80%;
+}
+th, td{
+	/*border-bottom: 1px solid #ddd;*/
+	padding: 15px;
+    text-align: center;
+}

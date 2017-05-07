@@ -1,3 +1,4 @@
+var _user$project$App$mapWrapper = _elm_lang$html$Html$node('mapWrapper');
 var _user$project$App$checkUser = F3(
 	function (models, name, pass) {
 		checkUser:
@@ -21,15 +22,15 @@ var _user$project$App$checkUser = F3(
 			}
 		}
 	});
-var _user$project$App$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {username: a, password: b, email: c, phno: d, role: e, tags: f, errorMsg: g, screen: h};
+var _user$project$App$Model = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {username: a, password: b, email: c, phno: d, role: e, tags: f, errorMsg: g, screen: h, checkout: i};
 	});
-var _user$project$App$init = A8(_user$project$App$Model, 'Ajay', '1234', '', '', '', '', '', '1');
-var _user$project$App$user1 = A8(_user$project$App$Model, 'Ajay', '1234', 'ajay@gmail.com', '789654123', 'teacher', 'java, c, c++', '', '1');
-var _user$project$App$user2 = A8(_user$project$App$Model, 'Jeorge', '1234', 'jeorge@gmail.com', '789654123', 'seeker', 'java', '', '1');
-var _user$project$App$user3 = A8(_user$project$App$Model, 'Hussain', '1234', 'hussain@gmail.com', '789654123', 'teacher', 'javascript, html', '', '1');
-var _user$project$App$user4 = A8(_user$project$App$Model, 'Javed', '1234', 'javed@gmail.com', '789654123', 'teacher', 'python', '', '1');
+var _user$project$App$init = A9(_user$project$App$Model, 'Ajay', '1234', '', '', '', '', '', '1', '');
+var _user$project$App$user1 = A9(_user$project$App$Model, 'Ajay', '1234', 'ajay@gmail.com', '789654123', 'teacher', 'java, c, c++', '', '1', '');
+var _user$project$App$user2 = A9(_user$project$App$Model, 'Jeorge', '1234', 'jeorge@gmail.com', '789654123', 'seeker', 'java', '', '1', '');
+var _user$project$App$user3 = A9(_user$project$App$Model, 'Hussain', '1234', 'hussain@gmail.com', '789654123', 'teacher', 'javascript, html', '', '1', '');
+var _user$project$App$user4 = A9(_user$project$App$Model, 'Javed', '1234', 'javed@gmail.com', '789654123', 'teacher', 'python', '', '1', '');
 var _user$project$App$userList = {
 	ctor: '::',
 	_0: _user$project$App$user1,
@@ -53,7 +54,7 @@ var _user$project$App$getUser = F2(
 		while (true) {
 			var _p2 = models;
 			if (_p2.ctor === '[]') {
-				return A8(_user$project$App$Model, 'Ajay', '1234', '', '', '', '', '', '1');
+				return A9(_user$project$App$Model, 'Ajay', '1234', '', '', '', '', '', '1', '');
 			} else {
 				var _p3 = _p2._0;
 				if (_elm_lang$core$Native_Utils.eq(_p3.username, name)) {
@@ -80,15 +81,15 @@ var _user$project$App$update = F2(
 				return _elm_lang$core$Native_Utils.update(
 					model,
 					{password: _p4._0});
-			case 'ClickRegisterUser':
+			case 'RegisterUserPage':
 				return _elm_lang$core$Native_Utils.update(
 					model,
-					{errorMsg: ''});
+					{errorMsg: '', screen: '0'});
 			case 'ClickUser':
 				return _elm_lang$core$Native_Utils.update(
 					model,
 					{
-						username: A2(_user$project$App$getUser, _user$project$App$userList, _p4._0).username,
+						checkout: A2(_user$project$App$getUser, _user$project$App$userList, _p4._0).username,
 						screen: '3'
 					});
 			case 'ClickLogIn':
@@ -97,16 +98,163 @@ var _user$project$App$update = F2(
 					{errorMsg: '', screen: '2'}) : _elm_lang$core$Native_Utils.update(
 					model,
 					{errorMsg: 'Invalid Username or Password', screen: '1'});
-			default:
+			case 'LogOut':
 				return _elm_lang$core$Native_Utils.update(
 					model,
 					{username: '', password: '', screen: '1'});
+			case 'Home':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{screen: '2'});
+			case 'ClickRegister':
+				return A3(_user$project$App$checkUser, _user$project$App$userList, model.username, model.password) ? _elm_lang$core$Native_Utils.update(
+					model,
+					{errorMsg: 'Username taken', screen: '0'}) : _elm_lang$core$Native_Utils.update(
+					model,
+					{errorMsg: '', screen: '2'});
+			case 'LogInUserPage':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{screen: '1'});
+			case 'SetPhNo':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{phno: _p4._0});
+			case 'SetTags':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{tags: _p4._0});
+			case 'SetEmail':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{email: _p4._0});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{role: _p4._0});
 		}
 	});
+var _user$project$App$SetRole = function (a) {
+	return {ctor: 'SetRole', _0: a};
+};
+var _user$project$App$SetEmail = function (a) {
+	return {ctor: 'SetEmail', _0: a};
+};
+var _user$project$App$SetTags = function (a) {
+	return {ctor: 'SetTags', _0: a};
+};
+var _user$project$App$SetPhNo = function (a) {
+	return {ctor: 'SetPhNo', _0: a};
+};
+var _user$project$App$ClickRegister = {ctor: 'ClickRegister'};
+var _user$project$App$LogInUserPage = {ctor: 'LogInUserPage'};
+var _user$project$App$Home = {ctor: 'Home'};
 var _user$project$App$ClickUser = function (a) {
 	return {ctor: 'ClickUser', _0: a};
 };
 var _user$project$App$LogOut = {ctor: 'LogOut'};
+var _user$project$App$navbar = function (name) {
+	return A2(
+		_elm_lang$html$Html$nav,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('navbar'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('container-fluid'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('navbar-header'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$a,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('navbar-brand'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(name),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$ul,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('nav navbar-nav'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$a,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(_user$project$App$Home),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Home'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$li,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$a,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onClick(_user$project$App$LogOut),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Logout'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$App$secondPage = function (model) {
 	var loggedUser = model.username;
 	return A2(
@@ -127,34 +275,8 @@ var _user$project$App$secondPage = function (model) {
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$p,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(model.username),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('btn btn-primary'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_user$project$App$LogOut),
-									_1: {ctor: '[]'}
-								}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Logout'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+					_0: _user$project$App$navbar(model.username),
+					_1: {ctor: '[]'}
 				}),
 			_1: {
 				ctor: '::',
@@ -168,13 +290,17 @@ var _user$project$App$secondPage = function (model) {
 					{
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$p,
-							{ctor: '[]'},
+							_user$project$App$mapWrapper,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Hello world'),
-								_1: {ctor: '[]'}
-							}),
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'latitude', '48.2082'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'longitude', '16.3738'),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -251,7 +377,7 @@ var _user$project$App$secondPage = function (model) {
 														_1: {
 															ctor: '::',
 															_0: _elm_lang$html$Html_Events$onClick(
-																_user$project$App$ClickUser('Ajay')),
+																_user$project$App$ClickUser('Jeorge')),
 															_1: {ctor: '[]'}
 														}
 													},
@@ -262,7 +388,7 @@ var _user$project$App$secondPage = function (model) {
 															{ctor: '[]'},
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html$text('Jeorge (Teacher)'),
+																_0: _elm_lang$html$Html$text('Jeorge (Seeker)'),
 																_1: {ctor: '[]'}
 															}),
 														_1: {
@@ -288,7 +414,7 @@ var _user$project$App$secondPage = function (model) {
 															_1: {
 																ctor: '::',
 																_0: _elm_lang$html$Html_Events$onClick(
-																	_user$project$App$ClickUser('Ajay')),
+																	_user$project$App$ClickUser('Hussain')),
 																_1: {ctor: '[]'}
 															}
 														},
@@ -299,7 +425,7 @@ var _user$project$App$secondPage = function (model) {
 																{ctor: '[]'},
 																{
 																	ctor: '::',
-																	_0: _elm_lang$html$Html$text('Hussain (Seeker)'),
+																	_0: _elm_lang$html$Html$text('Hussain (Teacher)'),
 																	_1: {ctor: '[]'}
 																}),
 															_1: {
@@ -325,7 +451,7 @@ var _user$project$App$secondPage = function (model) {
 																_1: {
 																	ctor: '::',
 																	_0: _elm_lang$html$Html_Events$onClick(
-																		_user$project$App$ClickUser('Ajay')),
+																		_user$project$App$ClickUser('Javed')),
 																	_1: {ctor: '[]'}
 																}
 															},
@@ -367,11 +493,14 @@ var _user$project$App$secondPage = function (model) {
 		});
 };
 var _user$project$App$thirdPage = function (model) {
+	var member = A2(_user$project$App$getUser, _user$project$App$userList, model.checkout);
+	var showteacher = _elm_lang$core$Native_Utils.eq(member.role, 'teacher') ? '' : 'hidden';
+	var showseeker = _elm_lang$core$Native_Utils.eq(member.role, 'seeker') ? '' : 'hidden';
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('container-fuild'),
+			_0: _elm_lang$html$Html_Attributes$class('container'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -385,51 +514,172 @@ var _user$project$App$thirdPage = function (model) {
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$p,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('col-xs-8'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(model.username),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('btn btn-primary col-xs-6 col-xs-offset-2 '),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_user$project$App$LogOut),
-									_1: {ctor: '[]'}
-								}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Logout'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+					_0: _user$project$App$navbar(model.username),
+					_1: {ctor: '[]'}
 				}),
 			_1: {
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('row'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h2,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('jumbotron'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(model.checkout),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('row'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('text-left'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$table,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(
+												{
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'cell-padding', _1: '10px'},
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$tr,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$td,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class(showteacher),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$h4,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Teaches : '),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$td,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class(showseeker),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$h4,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Interested In : '),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$td,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$h5,
+																		{ctor: '[]'},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text(member.tags),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$tr,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$td,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$h4,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Contact'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
 var _user$project$App$ClickLogIn = {ctor: 'ClickLogIn'};
-var _user$project$App$ClickRegisterUser = {ctor: 'ClickRegisterUser'};
+var _user$project$App$RegisterUserPage = {ctor: 'RegisterUserPage'};
 var _user$project$App$SetPassword = function (a) {
 	return {ctor: 'SetPassword', _0: a};
 };
@@ -669,9 +919,589 @@ var _user$project$App$loginPage = function (model) {
 																_0: _elm_lang$html$Html$text('Log In'),
 																_1: {ctor: '[]'}
 															}),
-														_1: {ctor: '[]'}
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$button,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('btn btn-link'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Events$onClick(_user$project$App$RegisterUserPage),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Register'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
 													}),
 												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$App$signUpPage = function (model) {
+	var showError = _elm_lang$core$String$isEmpty(model.errorMsg) ? 'hidden' : '';
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('container-mod container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('jumbotron-mod jumbotron text-left'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$id('form'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$h2,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('text-center'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Sign Up'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$p,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('text-center help-block'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Please Log In.'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class(showError),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('alert alert-danger'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(model.errorMsg),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('form-group row'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('col-md-offset-2 col-md-8'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$label,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$for('username'),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Username:'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$input,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$id('username'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$type_('text'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('form-control'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$value(model.username),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetUsername),
+																					_1: {ctor: '[]'}
+																				}
+																			}
+																		}
+																	}
+																},
+																{ctor: '[]'}),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('form-group row'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$div,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('col-md-offset-2 col-md-8'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$label,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$for('password'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Password:'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$input,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$id('password'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$type_('password'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('form-control'),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$value(model.password),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetPassword),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	},
+																	{ctor: '[]'}),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('form-group row'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$div,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('col-md-offset-2 col-md-8'),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$label,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$for('phno'),
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Ph. No.:'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$input,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$id('phno'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$type_('text'),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$class('form-control'),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$value(model.phno),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetPhNo),
+																							_1: {ctor: '[]'}
+																						}
+																					}
+																				}
+																			}
+																		},
+																		{ctor: '[]'}),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$div,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('form-group row'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$div,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('col-md-offset-2 col-md-8'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$label,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$for('email'),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Email:'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$input,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$id('email'),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$type_('text'),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$class('form-control'),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$value(model.email),
+																							_1: {
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetEmail),
+																								_1: {ctor: '[]'}
+																							}
+																						}
+																					}
+																				}
+																			},
+																			{ctor: '[]'}),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$div,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('form-group row'),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$div,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('col-md-offset-2 col-md-8'),
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$label,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$for('role'),
+																				_1: {ctor: '[]'}
+																			},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('Role:   '),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$input,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$id('role'),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$type_('radio'),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$class(''),
+																							_1: {
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$name('role'),
+																								_1: {
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$value('Teacher'),
+																									_1: {
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$checked(true),
+																										_1: {ctor: '[]'}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				},
+																				{ctor: '[]'}),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text(' Teacher  '),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_elm_lang$html$Html$input,
+																						{
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$id('role'),
+																							_1: {
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$type_('radio'),
+																								_1: {
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$class(''),
+																									_1: {
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Attributes$name('role'),
+																										_1: {
+																											ctor: '::',
+																											_0: _elm_lang$html$Html_Attributes$value('Seeker'),
+																											_1: {ctor: '[]'}
+																										}
+																									}
+																								}
+																							}
+																						},
+																						{ctor: '[]'}),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html$text(' Seeker  '),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	}),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$div,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('form-group row'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$div,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('col-md-offset-2 col-md-8'),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$label,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$for('tags'),
+																					_1: {ctor: '[]'}
+																				},
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text('Keywords:'),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_elm_lang$html$Html$input,
+																					{
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Attributes$id('tags'),
+																						_1: {
+																							ctor: '::',
+																							_0: _elm_lang$html$Html_Attributes$type_('text'),
+																							_1: {
+																								ctor: '::',
+																								_0: _elm_lang$html$Html_Attributes$class('form-control'),
+																								_1: {
+																									ctor: '::',
+																									_0: _elm_lang$html$Html_Attributes$value(model.tags),
+																									_1: {
+																										ctor: '::',
+																										_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetTags),
+																										_1: {ctor: '[]'}
+																									}
+																								}
+																							}
+																						}
+																					},
+																					{ctor: '[]'}),
+																				_1: {ctor: '[]'}
+																			}
+																		}),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$div,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('text-center'),
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$button,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('btn btn-link'),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Events$onClick(_user$project$App$LogInUserPage),
+																					_1: {ctor: '[]'}
+																				}
+																			},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('Log In'),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_elm_lang$html$Html$button,
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$class('btn btn-primary'),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Events$onClick(_user$project$App$ClickRegister),
+																						_1: {ctor: '[]'}
+																					}
+																				},
+																				{
+																					ctor: '::',
+																					_0: _elm_lang$html$Html$text('Register'),
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {ctor: '[]'}
+																		}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}
 											}
 										}
 									}
@@ -686,6 +1516,8 @@ var _user$project$App$loginPage = function (model) {
 var _user$project$App$view = function (model) {
 	var _p5 = model.screen;
 	switch (_p5) {
+		case '0':
+			return _user$project$App$signUpPage(model);
 		case '1':
 			return _user$project$App$loginPage(model);
 		case '2':
@@ -696,8 +1528,8 @@ var _user$project$App$view = function (model) {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'App',
 				{
-					start: {line: 119, column: 5},
-					end: {line: 123, column: 32}
+					start: {line: 155, column: 5},
+					end: {line: 160, column: 32}
 				},
 				_p5)('Help');
 	}
