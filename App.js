@@ -8559,16 +8559,7 @@ var _user$project$App$secondPage = function (model) {
 								_1: {
 									ctor: '::',
 									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'longitude', '16.3738'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$style(
-											{
-												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'height', _1: '400px'},
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
+									_1: {ctor: '[]'}
 								}
 							},
 							{ctor: '[]'}),
