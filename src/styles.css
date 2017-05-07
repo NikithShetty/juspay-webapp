@@ -26,3 +26,7 @@ th, td{
 	padding: 15px;
     text-align: center;
 }
+google-map {
+	height: 400px;
+	margin: 10px;
+}

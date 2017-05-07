@@ -266,7 +266,8 @@ signUpPage model =
 
 mapWrapper : List (Attribute a) -> List (Html a) -> Html a
 mapWrapper =
-    Html.node "mapWrapper"
+    Html.node "map-wrapper"
+
 
 secondPage : Model -> Html Msg
 secondPage model = 
@@ -279,7 +280,6 @@ secondPage model =
             [  mapWrapper
                 [ attribute "latitude" "48.2082"
                 , attribute "longitude" "16.3738"
-                --, attribute "api-key" "AIzaSyB3FgKD-lpzV7Na2hMk4HnufAc6MxjS5EI"
                 --, attribute "drag-events" "true"
                 ]
                 []
