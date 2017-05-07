@@ -278,8 +278,8 @@ secondPage model =
         [ div [ class "row"] [ navbar model.username ]
         , div [ class "col-xs-12 col-md-6"] 
             [  mapWrapper
-                [ attribute "latitude" "48.2082"
-                , attribute "longitude" "16.3738"
+                [ attribute "latitude" "12.942149"
+                , attribute "longitude" "77.622002"
                 --, attribute "drag-events" "true"
                 ]
                 []
@@ -334,17 +334,31 @@ thirdPage model =
         , div [ class "row"]
             [ h2 [ class "jumbotron"] [ text model.checkout ] ]
         , div [ class "row" ]
-            [ div [ class "text-left" ] 
-                [   table [ style [("cell-padding", "10px")]] 
-                        [   tr [] 
-                                [ td [class showteacher] [ h4 [] [text "Teaches : " ]]
-                                , td [class showseeker] [ h4 [] [text "Interested In : "]]
-                                , td [] [ h5 [] [text member.tags] ]
-                                ]
-                        ,   tr []
-                                [   td [] [ h4 [] [ text "Contact"]  ] 
-                                ]    
-                        ]
+            [ div [class "col-md-6"] 
+                [ div [ class "text-left" ] 
+                    [   table [ style [("cell-padding", "10px")]] 
+                            [   tr [] 
+                                    [ td [class showteacher] [ h4 [] [text "Teaches : " ]]
+                                    , td [class showseeker] [ h4 [] [text "Interested In : "]]
+                                    , td [] [ h5 [] [text member.tags] ]
+                                    ]
+                            ,   tr []
+                                    [   td [] [ h4 [] [ text "Contact : "]  ] 
+                                    , td [] [ h4 [] [ a[href ("whatsapp://send?text=Hi there!&phone=" ++ (toString member.phno)), class "btn btn-link"] [ text "Ping me on whatsapp!!" ] ]]
+                                    ] 
+                            , tr []
+                                [ td [] [ h4 [] [text "Email : "] ]
+                                , td [] [ a [href ("mailto:" ++ member.email), class "btn btn-link"] [text member.email]] ]   
+                            ]
+                    ]
+                ]
+            , div [ class "col-md-6" ] 
+                [ mapWrapper
+                    [ attribute "latitude" "12.942149"
+                    , attribute "longitude" "77.622002"
+                    --, attribute "drag-events" "true"
+                    ]
+                    []
                 ]
             ]
         ] 
