@@ -9677,12 +9677,8 @@ var _user$project$App$signUpPage = function (model) {
 																				_0: _elm_lang$html$Html_Attributes$class('form-control'),
 																				_1: {
 																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$value(model.username),
-																					_1: {
-																						ctor: '::',
-																						_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetUsername),
-																						_1: {ctor: '[]'}
-																					}
+																					_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetUsername),
+																					_1: {ctor: '[]'}
 																				}
 																			}
 																		}
@@ -9740,12 +9736,8 @@ var _user$project$App$signUpPage = function (model) {
 																					_0: _elm_lang$html$Html_Attributes$class('form-control'),
 																					_1: {
 																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$value(model.password),
-																						_1: {
-																							ctor: '::',
-																							_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetPassword),
-																							_1: {ctor: '[]'}
-																						}
+																						_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetPassword),
+																						_1: {ctor: '[]'}
 																					}
 																				}
 																			}
@@ -9803,12 +9795,8 @@ var _user$project$App$signUpPage = function (model) {
 																						_0: _elm_lang$html$Html_Attributes$class('form-control'),
 																						_1: {
 																							ctor: '::',
-																							_0: _elm_lang$html$Html_Attributes$value(model.phno),
-																							_1: {
-																								ctor: '::',
-																								_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetPhNo),
-																								_1: {ctor: '[]'}
-																							}
+																							_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetPhNo),
+																							_1: {ctor: '[]'}
 																						}
 																					}
 																				}
@@ -9866,12 +9854,8 @@ var _user$project$App$signUpPage = function (model) {
 																							_0: _elm_lang$html$Html_Attributes$class('form-control'),
 																							_1: {
 																								ctor: '::',
-																								_0: _elm_lang$html$Html_Attributes$value(model.email),
-																								_1: {
-																									ctor: '::',
-																									_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetEmail),
-																									_1: {ctor: '[]'}
-																								}
+																								_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetEmail),
+																								_1: {ctor: '[]'}
 																							}
 																						}
 																					}
@@ -10031,12 +10015,8 @@ var _user$project$App$signUpPage = function (model) {
 																									_0: _elm_lang$html$Html_Attributes$class('form-control'),
 																									_1: {
 																										ctor: '::',
-																										_0: _elm_lang$html$Html_Attributes$value(model.tags),
-																										_1: {
-																											ctor: '::',
-																											_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetTags),
-																											_1: {ctor: '[]'}
-																										}
+																										_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetTags),
+																										_1: {ctor: '[]'}
 																									}
 																								}
 																							}
