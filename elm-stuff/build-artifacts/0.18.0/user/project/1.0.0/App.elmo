@@ -34,10 +34,10 @@ var _user$project$App$Model = F9(
 		return {username: a, password: b, email: c, phno: d, role: e, tags: f, errorMsg: g, screen: h, checkout: i};
 	});
 var _user$project$App$init = A9(_user$project$App$Model, 'Ajay', '1234', '', '', '', '', '', '1', '');
-var _user$project$App$user1 = A9(_user$project$App$Model, 'Ajay', '1234', 'ajay@gmail.com', '+91789654123', 'teacher', 'java, c, c++', '', '1', '');
-var _user$project$App$user2 = A9(_user$project$App$Model, 'Jeorge', '1234', 'jeorge@gmail.com', '+91789654123', 'seeker', 'java', '', '1', '');
-var _user$project$App$user3 = A9(_user$project$App$Model, 'Hussain', '1234', 'hussain@gmail.com', '+91789654123', 'teacher', 'javascript, html', '', '1', '');
-var _user$project$App$user4 = A9(_user$project$App$Model, 'Javed', '1234', 'javed@gmail.com', '+918892585434', 'teacher', 'python', '', '1', '');
+var _user$project$App$user1 = A9(_user$project$App$Model, 'Ajay', '1234', 'ajay@gmail.com', '+91789654123', 'teacher', 'Java, C, C++', '', '1', '');
+var _user$project$App$user2 = A9(_user$project$App$Model, 'Jeorge', '1234', 'jeorge@gmail.com', '+91789654123', 'seeker', 'Java', '', '1', '');
+var _user$project$App$user3 = A9(_user$project$App$Model, 'Hussain', '1234', 'hussain@gmail.com', '+91789654123', 'teacher', 'Javascript, HTML, ELM, Haskell', '', '1', '');
+var _user$project$App$user4 = A9(_user$project$App$Model, 'Javed', '1234', 'javed@gmail.com', '+918892585434', 'teacher', 'Python, R', '', '1', '');
 var _user$project$App$userList = {
 	ctor: '::',
 	_0: _user$project$App$user1,
@@ -61,7 +61,7 @@ var _user$project$App$getUser = F2(
 		while (true) {
 			var _p2 = models;
 			if (_p2.ctor === '[]') {
-				return A9(_user$project$App$Model, 'Ajay', '1234', '', '', '', '', '', '1', '');
+				return A9(_user$project$App$Model, '', '', '', '', '', '', '', '1', '');
 			} else {
 				var _p3 = _p2._0;
 				if (_elm_lang$core$Native_Utils.eq(_p3.username, name)) {
@@ -444,7 +444,7 @@ var _user$project$App$secondPage = function (model) {
 																	{ctor: '[]'},
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html$text('Interested in : Java'),
+																		_0: _elm_lang$html$Html$text('Interested in : Javascript, HTML, ELM, Haskell'),
 																		_1: {ctor: '[]'}
 																	}),
 																_1: {ctor: '[]'}
@@ -481,7 +481,7 @@ var _user$project$App$secondPage = function (model) {
 																		{ctor: '[]'},
 																		{
 																			ctor: '::',
-																			_0: _elm_lang$html$Html$text('Courses : Python'),
+																			_0: _elm_lang$html$Html$text('Courses : Python, R'),
 																			_1: {ctor: '[]'}
 																		}),
 																	_1: {ctor: '[]'}
@@ -846,7 +846,7 @@ var _user$project$App$loginPage = function (model) {
 						{ctor: '[]'},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('MeetUrTutor'),
+							_0: _elm_lang$html$Html$text('Meet-Ur-Tutor'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -969,12 +969,8 @@ var _user$project$App$loginPage = function (model) {
 																				_0: _elm_lang$html$Html_Attributes$class('form-control'),
 																				_1: {
 																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$value(model.username),
-																					_1: {
-																						ctor: '::',
-																						_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetUsername),
-																						_1: {ctor: '[]'}
-																					}
+																					_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetUsername),
+																					_1: {ctor: '[]'}
 																				}
 																			}
 																		}
@@ -1032,12 +1028,8 @@ var _user$project$App$loginPage = function (model) {
 																					_0: _elm_lang$html$Html_Attributes$class('form-control'),
 																					_1: {
 																						ctor: '::',
-																						_0: _elm_lang$html$Html_Attributes$value(model.password),
-																						_1: {
-																							ctor: '::',
-																							_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetPassword),
-																							_1: {ctor: '[]'}
-																						}
+																						_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetPassword),
+																						_1: {ctor: '[]'}
 																					}
 																				}
 																			}
@@ -1134,7 +1126,7 @@ var _user$project$App$signUpPage = function (model) {
 						{ctor: '[]'},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('MeetUrTutor'),
+							_0: _elm_lang$html$Html$text('Meet-Ur-Tutor'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}

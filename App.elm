@@ -39,10 +39,10 @@ init =
     Model "Ajay" "1234" "" "" "" "" "" "1" ""
 
 -- Array of defualt users
-user1 = Model "Ajay" "1234" "ajay@gmail.com" "+91789654123" "teacher" "java, c, c++" "" "1" ""
-user2 = Model "Jeorge" "1234" "jeorge@gmail.com" "+91789654123" "seeker" "java" "" "1" ""
-user3 = Model "Hussain" "1234" "hussain@gmail.com" "+91789654123" "teacher" "javascript, html" "" "1" ""
-user4 = Model "Javed" "1234" "javed@gmail.com" "+918892585434" "teacher" "python" "" "1" ""
+user1 = Model "Ajay" "1234" "ajay@gmail.com" "+91789654123" "teacher" "Java, C, C++" "" "1" ""
+user2 = Model "Jeorge" "1234" "jeorge@gmail.com" "+91789654123" "seeker" "Java" "" "1" ""
+user3 = Model "Hussain" "1234" "hussain@gmail.com" "+91789654123" "teacher" "Javascript, HTML, ELM, Haskell" "" "1" ""
+user4 = Model "Javed" "1234" "javed@gmail.com" "+918892585434" "teacher" "Python, R" "" "1" ""
 
 userList = [user1, user2, user3, user4]
 
@@ -62,7 +62,7 @@ checkUser models name pass =
 getUser : List Model -> String -> Model
 getUser models name =
     case models of
-        [] -> Model "Ajay" "1234" "" "" "" "" "" "1" ""
+        [] -> Model "" "" "" "" "" "" "" "1" ""
         (x::xs) -> 
             if x.username == name
             then x
@@ -190,7 +190,7 @@ loginPage model =
                 ""
     in
         div [ class "container-mod container" ]
-            [ div [class "row text-center"] [ h1 [] [text "MeetUrTutor"] ]  
+            [ div [class "row text-center"] [ h1 [] [text "Meet-Ur-Tutor"] ]  
             , div [ class "jumbotron-mod jumbotron text-left" ]
                     [ 
                     div [ id "form" ]
@@ -202,13 +202,13 @@ loginPage model =
                     , div [ class "form-group row" ]
                     [ div [ class "col-md-offset-2 col-md-8" ]
                     [ label [ for "username" ] [ text "Username:" ]
-                    , input [ id "username", type_ "text", class "form-control", Html.Attributes.value model.username, onInput SetUsername ] []
+                    , input [ id "username", type_ "text", class "form-control", onInput SetUsername ] []
                     ]
                     ]
                     , div [ class "form-group row" ]
                     [ div [ class "col-md-offset-2 col-md-8" ]
                     [ label [ for "password" ] [ text "Password:" ]
-                    , input [ id "password", type_ "password", class "form-control", Html.Attributes.value model.password, onInput SetPassword ] []
+                    , input [ id "password", type_ "password", class "form-control", onInput SetPassword ] []
                     ]
                     ]
                     , div [ class "text-center" ] [
@@ -230,7 +230,7 @@ signUpPage model =
                 ""
     in
         div [ class "container-mod container" ]
-            [   div [class "row text-center"] [ h1 [] [text "MeetUrTutor"] ]  
+            [   div [class "row text-center"] [ h1 [] [text "Meet-Ur-Tutor"] ]  
             , div [ class "jumbotron-mod jumbotron text-left" ]
                     [
                     div [ id "form" ]
@@ -320,11 +320,11 @@ secondPage model =
                             ]
                         , a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser "Hussain") ] 
                             [ h4 [] [ text "Hussain (Teacher)" ]
-                            , p [] [ text "Interested in : Java"]
+                            , p [] [ text "Interested in : Javascript, HTML, ELM, Haskell"]
                             ]
                         , a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser "Javed") ] 
                             [ h4 [] [ text "Javed (Teacher)" ]
-                            , p [] [ text "Courses : Python"]
+                            , p [] [ text "Courses : Python, R"]
                             ]
                         ]
                 ]
