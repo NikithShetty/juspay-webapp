@@ -3,9 +3,9 @@ port module App exposing (..)
 import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
-import Http
-import Json.Decode as Decode exposing (..)
-import Json.Encode as Encode exposing (..)
+--import Http
+--import Json.Decode as Decode exposing (..)
+--import Json.Encode as Encode exposing (..)
 
 
 main : Program Never Model Msg
@@ -28,14 +28,14 @@ type alias Model =
     , email : String
     , phno : String
     , role : String
-    ,tags :String
+    , tags :String
     , errorMsg : String
     , screen : String
 }
 
 init : Model
 init =
-    Model "" "" "" "" "" "" "" "1"
+    Model "Ajay" "1234" "" "" "" "" "" "1"
 
 -- Array of users
 user1 = Model "Ajay" "1234" "ajay@gmail.com" "789654123" "teacher" "java, c, c++" "" "1"
@@ -46,9 +46,14 @@ user4 = Model "Javed" "1234" "javed@gmail.com" "789654123" "teacher" "python" ""
 userList = [user1, user2, user3, user4]
 
 
-checkUser : Model -> Model
-checkUser model =
-    model
+checkUser : List Model -> String -> String -> Bool
+checkUser models name pass =
+    case models of
+        [] -> False
+        (x::xs) -> 
+            if x.username == name && x.password == pass
+            then True
+            else checkUser xs name pass
 
 
 -- Messages 
@@ -77,9 +82,9 @@ update msg model =
             { model | errorMsg = "" }
 
         ClickLogIn ->
-            if model.username == "Ajay" && model.password == "1234"
+            if checkUser userList model.username model.password --model.username == "Ajay" && model.password == "1234"
             then { model | errorMsg = "", screen = "2" }
-            else { model | errorMsg = "Invalid user and Password", screen = "1" }
+            else { model | errorMsg = "Invalid Username or Password", screen = "1" }
             
 
         LogOut ->
@@ -120,7 +125,7 @@ loginPage model =
             else
                 ""
     in
-        div [ class "container" ]
+        div [ class "container-mod container" ]
             [   div [ class "jumbotron text-left" ]
                     [ -- Login/Register form or user greeting
                     div [ id "form" ]
@@ -149,9 +154,62 @@ loginPage model =
 
 secondPage model = 
     div [ class "container" ] 
-        [ div [ class "jumbotron text-center"]
-              [ p [] [ text "hello world"] ]  
-        , div [ class "text-center" ] 
-              [button [ class "btn btn-primary", onClick LogOut ] [ text "Logout" ]
-              ]
+        [ div [ class "row jumbotron"] 
+            [ p [] [ text "Nearby.." ]
+            ]
+        , div [ class "col-xs-12 col-md-6"] 
+            [ p [] [text "Hello world"] ]
+            , div [ class "col-xs-12 col-md-6" ]
+                [ div [ class "row col-xs-12 col-md-12"] 
+                    [ div [class "list-group"] 
+                        [ a [class "list-group-item list-group-item-action align-items-start"] 
+                            [ h4 [] [ text "Ajay" ]
+                            , p [] [ text "other details of Ajay"]
+                            ]
+                        , a [class "list-group-item list-group-item-action align-items-start"] 
+                            [ h4 [] [ text "Jeorge" ]
+                            , p [] [ text "other details of Jeorge"]
+                            ]
+                        , a [class "list-group-item list-group-item-action align-items-start"] 
+                            [ h4 [] [ text "Jeorge" ]
+                            , p [] [ text "other details of Jeorge"]
+                            ]
+                        ]
+                ]
+            ]
         ]
+
+
+
+--renderDiv : List Model -> Html Msg
+--renderDiv models =
+--    case models of
+--        [] -> div [ class "row col-xs-12" ] [ p [] [ text "No users around" ] ]
+--        (x::xs) -> 
+--            div [ class "row col-xs-12" ] [ p [] [ text x.username ] ](renderDiv xs)
+
+
+--div [ class "jumbotron text-center"]
+--              [ p [] [ text "hello world"] ]  
+--        , div [ class "text-center" ] 
+--              [button [ class "btn btn-primary", onClick LogOut ] [ text "Logout" ]
+--              ]
+
+
+
+
+
+
+
+--div [ class "col-xs-12 col-md-6"] 
+--                [ p [] [text "Hello world"] ]
+--            , div [ class "col-xs-12 col-md-6" ]
+--                [ div [ class "row card card-primary card-inverse" ] 
+--                    [ div [class "card-title"] [ text "Ajay" ] ]
+--                , div [ class "row col-xs-12" ] 
+--                    [ p [] [ text "Jeorge" ] ]
+--                , div [ class "row col-xs-12" ] 
+--                    [ p [] [ text "Hussain" ] ]
+--                , div [ class "row col-xs-12" ] 
+--                    [ p [] [ text "Javed" ] ]
+--                ]
