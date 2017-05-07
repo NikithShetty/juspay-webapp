@@ -55,6 +55,15 @@ checkUser models name pass =
             then True
             else checkUser xs name pass
 
+getUser : List Model -> String -> Model
+getUser models name =
+    case models of
+        [] -> Model "Ajay" "1234" "" "" "" "" "" "1"
+        (x::xs) -> 
+            if x.username == name
+            then x
+            else getUser xs name
+
 
 -- Messages 
 
@@ -64,6 +73,7 @@ type Msg = SetUsername String
             | ClickRegisterUser
             | ClickLogIn
             | LogOut
+            | ClickUser String
 
 
 -- Update
@@ -81,12 +91,14 @@ update msg model =
         ClickRegisterUser ->
             { model | errorMsg = "" }
 
+        ClickUser name ->
+            {  model | username = (getUser userList name).username, screen = "3" }
+
         ClickLogIn ->
             if checkUser userList model.username model.password --model.username == "Ajay" && model.password == "1234"
             then { model | errorMsg = "", screen = "2" }
             else { model | errorMsg = "Invalid Username or Password", screen = "1" }
-            
-
+    
         LogOut ->
             { model | username = "", password = "", screen = "1" }
 
@@ -107,10 +119,8 @@ view model =
     case model.screen of
         "1" -> loginPage model
         "2" -> secondPage model
-        "3" -> loginPage model
+        "3" -> thirdPage model
         _ -> Debug.crash "Help"
---loggedInPage : Model -> Html Msg
---loggedInPage model = 
 
 
 
@@ -126,7 +136,7 @@ loginPage model =
                 ""
     in
         div [ class "container-mod container" ]
-            [   div [ class "jumbotron text-left" ]
+            [   div [ class "jumbotron-mod jumbotron text-left" ]
                     [ -- Login/Register form or user greeting
                     div [ id "form" ]
                     [ h2 [ class "text-center" ] [ text "Log In" ]
@@ -152,35 +162,58 @@ loginPage model =
                     ]
                     ]]]
 
+secondPage : Model -> Html Msg
 secondPage model = 
+    let 
+        loggedUser = model.username
+    in
     div [ class "container" ] 
-        [ div [ class "row jumbotron"] 
-            [ p [] [ text "Nearby.." ]
+        [ div [ class "row"] 
+            [ p [] [ text model.username ]
+            , button [ class "btn btn-primary", onClick LogOut ] [ text "Logout" ]
             ]
         , div [ class "col-xs-12 col-md-6"] 
             [ p [] [text "Hello world"] ]
             , div [ class "col-xs-12 col-md-6" ]
                 [ div [ class "row col-xs-12 col-md-12"] 
                     [ div [class "list-group"] 
-                        [ a [class "list-group-item list-group-item-action align-items-start"] 
-                            [ h4 [] [ text "Ajay" ]
-                            , p [] [ text "other details of Ajay"]
+                        [ a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser "Ajay")] 
+                            [ h4 [] [ text "Ajay (Teacher)" ]
+                            , p [] [ text "Courses : Java, C, C++"]
                             ]
-                        , a [class "list-group-item list-group-item-action align-items-start"] 
-                            [ h4 [] [ text "Jeorge" ]
-                            , p [] [ text "other details of Jeorge"]
+                        , a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser "Ajay") ] 
+                            [ h4 [] [ text "Jeorge (Teacher)" ]
+                            , p [] [ text "Courses : Java"]
                             ]
-                        , a [class "list-group-item list-group-item-action align-items-start"] 
-                            [ h4 [] [ text "Jeorge" ]
-                            , p [] [ text "other details of Jeorge"]
+                        , a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser "Ajay") ] 
+                            [ h4 [] [ text "Hussain (Seeker)" ]
+                            , p [] [ text "Interested in : Java"]
+                            ]
+                        , a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser "Ajay") ] 
+                            [ h4 [] [ text "Javed (Teacher)" ]
+                            , p [] [ text "Courses : Python"]
                             ]
                         ]
                 ]
             ]
         ]
 
+thirdPage : Model -> Html Msg
+thirdPage model = 
+    div [ class "container-fuild" ] 
+        [ div [ class "row"] 
+            [ h4 [ class "col-xs-8" ] [ text model.username ]
+            , button [ class "btn btn-primary col-xs-6 col-xs-offset-2 ", onClick LogOut ] [ text "Logout" ]
+            ]
+        , div [ class "row"]
+            [  ]
+        ] 
 
 
+--navbar : String -> Html Msg
+--navbar name = 
+--    nav [  ] 
+--        []
 --renderDiv : List Model -> Html Msg
 --renderDiv models =
 --    case models of
@@ -192,9 +225,9 @@ secondPage model =
 --div [ class "jumbotron text-center"]
 --              [ p [] [ text "hello world"] ]  
 --        , div [ class "text-center" ] 
+--
 --              [button [ class "btn btn-primary", onClick LogOut ] [ text "Logout" ]
 --              ]
-
 
 
 
