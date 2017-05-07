@@ -1,0 +1,28 @@
+/* src/styles.css */
+
+.container-mod {
+    margin: 1em auto;
+    max-width: 600px;
+}
+blockquote {
+    margin: 1em 0;
+}
+.jumbotron-mod {
+    margin: 2em auto;
+    max-width: 400px;
+}
+.jumbotron h2 {
+    margin-top: 0;
+}
+.jumbotron .help-block {
+    font-size: 14px;
+}
+
+table {
+	max-width: 80%;
+}
+th, td{
+	/*border-bottom: 1px solid #ddd;*/
+	padding: 15px;
+    text-align: center;
+}
