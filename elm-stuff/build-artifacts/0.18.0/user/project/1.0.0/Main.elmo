@@ -1,4 +1,27 @@
 var _user$project$Main$tokenDecoder = A2(_elm_lang$core$Json_Decode$field, 'access_token', _elm_lang$core$Json_Decode$string);
+var _user$project$Main$getTokenCompleted = F2(
+	function (model, result) {
+		var _p0 = result;
+		if (_p0.ctor === 'Ok') {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{token: _p0._0, password: '', errorMsg: ''}),
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						errorMsg: _elm_lang$core$Basics$toString(_p0._0)
+					}),
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		}
+	});
 var _user$project$Main$userEncoder = function (model) {
 	return _elm_lang$core$Json_Encode$object(
 		{
@@ -25,107 +48,31 @@ var _user$project$Main$authUser = F2(
 			_user$project$Main$userEncoder(model));
 		return A3(_elm_lang$http$Http$post, apiUrl, body, _user$project$Main$tokenDecoder);
 	});
-var _user$project$Main$api = 'http://localhost:3001/';
-var _user$project$Main$randomQuoteUrl = A2(_elm_lang$core$Basics_ops['++'], _user$project$Main$api, 'api/random-quote');
-var _user$project$Main$fetchRandomQuote = _elm_lang$http$Http$getString(_user$project$Main$randomQuoteUrl);
-var _user$project$Main$registerUrl = A2(_elm_lang$core$Basics_ops['++'], _user$project$Main$api, 'users');
-var _user$project$Main$loginUrl = A2(_elm_lang$core$Basics_ops['++'], _user$project$Main$api, 'sessions/create');
-var _user$project$Main$protectedQuoteUrl = A2(_elm_lang$core$Basics_ops['++'], _user$project$Main$api, 'api/protected/random-quote');
-var _user$project$Main$fetchProtectedQuote = function (model) {
-	return _elm_lang$http$Http$request(
-		{
-			method: 'GET',
-			headers: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$http$Http$header,
-					'Authorization',
-					A2(_elm_lang$core$Basics_ops['++'], 'Bearer ', model.token)),
-				_1: {ctor: '[]'}
-			},
-			url: _user$project$Main$protectedQuoteUrl,
-			body: _elm_lang$http$Http$emptyBody,
-			expect: _elm_lang$http$Http$expectString,
-			timeout: _elm_lang$core$Maybe$Nothing,
-			withCredentials: false
-		});
-};
-var _user$project$Main$setStorage = _elm_lang$core$Native_Platform.outgoingPort(
-	'setStorage',
-	function (v) {
-		return {username: v.username, password: v.password, token: v.token, quote: v.quote, protectedQuote: v.protectedQuote, errorMsg: v.errorMsg};
-	});
-var _user$project$Main$setStorageHelper = function (model) {
-	return {
-		ctor: '_Tuple2',
-		_0: model,
-		_1: _user$project$Main$setStorage(model)
-	};
-};
 var _user$project$Main$fetchRandomQuoteCompleted = F2(
-	function (model, result) {
-		var _p0 = result;
-		if (_p0.ctor === 'Ok') {
-			return _user$project$Main$setStorageHelper(
-				_elm_lang$core$Native_Utils.update(
-					model,
-					{quote: _p0._0}));
-		} else {
-			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-		}
-	});
-var _user$project$Main$getTokenCompleted = F2(
 	function (model, result) {
 		var _p1 = result;
 		if (_p1.ctor === 'Ok') {
-			return _user$project$Main$setStorageHelper(
-				_elm_lang$core$Native_Utils.update(
-					model,
-					{token: _p1._0, password: '', errorMsg: ''}));
-		} else {
 			return {
 				ctor: '_Tuple2',
 				_0: _elm_lang$core$Native_Utils.update(
 					model,
-					{
-						errorMsg: _elm_lang$core$Basics$toString(_p1._0)
-					}),
+					{quote: _p1._0}),
 				_1: _elm_lang$core$Platform_Cmd$none
 			};
-		}
-	});
-var _user$project$Main$fetchProtectedQuoteCompleted = F2(
-	function (model, result) {
-		var _p2 = result;
-		if (_p2.ctor === 'Ok') {
-			return _user$project$Main$setStorageHelper(
-				_elm_lang$core$Native_Utils.update(
-					model,
-					{protectedQuote: _p2._0}));
 		} else {
 			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 		}
 	});
-var _user$project$Main$removeStorage = _elm_lang$core$Native_Platform.outgoingPort(
-	'removeStorage',
-	function (v) {
-		return {username: v.username, password: v.password, token: v.token, quote: v.quote, protectedQuote: v.protectedQuote, errorMsg: v.errorMsg};
-	});
-var _user$project$Main$Model = F6(
-	function (a, b, c, d, e, f) {
-		return {username: a, password: b, token: c, quote: d, protectedQuote: e, errorMsg: f};
+var _user$project$Main$api = 'http://localhost:8000/';
+var _user$project$Main$randomQuoteUrl = A2(_elm_lang$core$Basics_ops['++'], _user$project$Main$api, 'api/random-quote');
+var _user$project$Main$fetchRandomQuote = _elm_lang$http$Http$getString(_user$project$Main$randomQuoteUrl);
+var _user$project$Main$registerUrl = A2(_elm_lang$core$Basics_ops['++'], _user$project$Main$api, 'users');
+var _user$project$Main$loginUrl = A2(_elm_lang$core$Basics_ops['++'], _user$project$Main$api, 'sessions/create');
+var _user$project$Main$Model = F5(
+	function (a, b, c, d, e) {
+		return {username: a, password: b, token: c, quote: d, errorMsg: e};
 	});
 var _user$project$Main$LogOut = {ctor: 'LogOut'};
-var _user$project$Main$FetchProtectedQuoteCompleted = function (a) {
-	return {ctor: 'FetchProtectedQuoteCompleted', _0: a};
-};
-var _user$project$Main$fetchProtectedQuoteCmd = function (model) {
-	return A2(
-		_elm_lang$http$Http$send,
-		_user$project$Main$FetchProtectedQuoteCompleted,
-		_user$project$Main$fetchProtectedQuote(model));
-};
-var _user$project$Main$GetProtectedQuote = {ctor: 'GetProtectedQuote'};
 var _user$project$Main$GetTokenCompleted = function (a) {
 	return {ctor: 'GetTokenCompleted', _0: a};
 };
@@ -144,79 +91,6 @@ var _user$project$Main$SetPassword = function (a) {
 var _user$project$Main$SetUsername = function (a) {
 	return {ctor: 'SetUsername', _0: a};
 };
-var _user$project$Main$FetchRandomQuoteCompleted = function (a) {
-	return {ctor: 'FetchRandomQuoteCompleted', _0: a};
-};
-var _user$project$Main$fetchRandomQuoteCmd = A2(_elm_lang$http$Http$send, _user$project$Main$FetchRandomQuoteCompleted, _user$project$Main$fetchRandomQuote);
-var _user$project$Main$init = function (model) {
-	var _p3 = model;
-	if (_p3.ctor === 'Just') {
-		return {ctor: '_Tuple2', _0: _p3._0, _1: _user$project$Main$fetchRandomQuoteCmd};
-	} else {
-		return {
-			ctor: '_Tuple2',
-			_0: A6(_user$project$Main$Model, '', '', '', '', '', ''),
-			_1: _user$project$Main$fetchRandomQuoteCmd
-		};
-	}
-};
-var _user$project$Main$update = F2(
-	function (msg, model) {
-		var _p4 = msg;
-		switch (_p4.ctor) {
-			case 'GetQuote':
-				return {ctor: '_Tuple2', _0: model, _1: _user$project$Main$fetchRandomQuoteCmd};
-			case 'FetchRandomQuoteCompleted':
-				return A2(_user$project$Main$fetchRandomQuoteCompleted, model, _p4._0);
-			case 'SetUsername':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{username: _p4._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'SetPassword':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{password: _p4._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'ClickRegisterUser':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: A2(_user$project$Main$authUserCmd, model, _user$project$Main$registerUrl)
-				};
-			case 'ClickLogIn':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: A2(_user$project$Main$authUserCmd, model, _user$project$Main$loginUrl)
-				};
-			case 'GetTokenCompleted':
-				return A2(_user$project$Main$getTokenCompleted, model, _p4._0);
-			case 'GetProtectedQuote':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: _user$project$Main$fetchProtectedQuoteCmd(model)
-				};
-			case 'FetchProtectedQuoteCompleted':
-				return A2(_user$project$Main$fetchProtectedQuoteCompleted, model, _p4._0);
-			default:
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{username: '', protectedQuote: '', token: ''}),
-					_1: _user$project$Main$removeStorage(model)
-				};
-		}
-	});
-var _user$project$Main$GetQuote = {ctor: 'GetQuote'};
 var _user$project$Main$view = function (model) {
 	var loggedIn = (_elm_lang$core$Native_Utils.cmp(
 		_elm_lang$core$String$length(model.token),
@@ -536,76 +410,6 @@ var _user$project$Main$view = function (model) {
 				}
 			});
 	}();
-	var protectedQuoteView = function () {
-		var hideIfNoProtectedQuote = _elm_lang$core$String$isEmpty(model.protectedQuote) ? 'hidden' : '';
-		return loggedIn ? A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$p,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('text-center'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('btn btn-info'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$GetProtectedQuote),
-									_1: {ctor: '[]'}
-								}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Grab a protected quote!'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$blockquote,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class(hideIfNoProtectedQuote),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$p,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(model.protectedQuote),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}) : A2(
-			_elm_lang$html$Html$p,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('text-center'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text('Please log in or register to see protected quotes.'),
-				_1: {ctor: '[]'}
-			});
-	}();
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -616,159 +420,84 @@ var _user$project$Main$view = function (model) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$h2,
+				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('text-center'),
+					_0: _elm_lang$html$Html_Attributes$class('jumbotron text-left'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('Chuck Norris Quotes'),
+					_0: authBoxView,
 					_1: {ctor: '[]'}
 				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$p,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('text-center'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('btn btn-success'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$GetQuote),
-									_1: {ctor: '[]'}
-								}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Grab a quote!'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$blockquote,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$p,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(model.quote),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('jumbotron text-left'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: authBoxView,
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$h2,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('text-center'),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Protected Chuck Norris Quotes'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: protectedQuoteView,
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
+			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Main$main = _elm_lang$html$Html$programWithFlags(
+var _user$project$Main$FetchRandomQuoteCompleted = function (a) {
+	return {ctor: 'FetchRandomQuoteCompleted', _0: a};
+};
+var _user$project$Main$fetchRandomQuoteCmd = A2(_elm_lang$http$Http$send, _user$project$Main$FetchRandomQuoteCompleted, _user$project$Main$fetchRandomQuote);
+var _user$project$Main$init = {
+	ctor: '_Tuple2',
+	_0: A5(_user$project$Main$Model, '', '', '', '', ''),
+	_1: _user$project$Main$fetchRandomQuoteCmd
+};
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p2 = msg;
+		switch (_p2.ctor) {
+			case 'GetQuote':
+				return {ctor: '_Tuple2', _0: model, _1: _user$project$Main$fetchRandomQuoteCmd};
+			case 'FetchRandomQuoteCompleted':
+				return A2(_user$project$Main$fetchRandomQuoteCompleted, model, _p2._0);
+			case 'SetUsername':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{username: _p2._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'SetPassword':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{password: _p2._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'ClickRegisterUser':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(_user$project$Main$authUserCmd, model, _user$project$Main$registerUrl)
+				};
+			case 'ClickLogIn':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(_user$project$Main$authUserCmd, model, _user$project$Main$loginUrl)
+				};
+			case 'GetTokenCompleted':
+				return A2(_user$project$Main$getTokenCompleted, model, _p2._0);
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{username: '', token: ''}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _user$project$Main$main = _elm_lang$html$Html$program(
 	{
 		init: _user$project$Main$init,
 		update: _user$project$Main$update,
-		subscriptions: function (_p5) {
+		subscriptions: function (_p3) {
 			return _elm_lang$core$Platform_Sub$none;
 		},
 		view: _user$project$Main$view
-	})(
-	_elm_lang$core$Json_Decode$oneOf(
-		{
-			ctor: '::',
-			_0: _elm_lang$core$Json_Decode$null(_elm_lang$core$Maybe$Nothing),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$core$Json_Decode$map,
-					_elm_lang$core$Maybe$Just,
-					A2(
-						_elm_lang$core$Json_Decode$andThen,
-						function (errorMsg) {
-							return A2(
-								_elm_lang$core$Json_Decode$andThen,
-								function (password) {
-									return A2(
-										_elm_lang$core$Json_Decode$andThen,
-										function (protectedQuote) {
-											return A2(
-												_elm_lang$core$Json_Decode$andThen,
-												function (quote) {
-													return A2(
-														_elm_lang$core$Json_Decode$andThen,
-														function (token) {
-															return A2(
-																_elm_lang$core$Json_Decode$andThen,
-																function (username) {
-																	return _elm_lang$core$Json_Decode$succeed(
-																		{errorMsg: errorMsg, password: password, protectedQuote: protectedQuote, quote: quote, token: token, username: username});
-																},
-																A2(_elm_lang$core$Json_Decode$field, 'username', _elm_lang$core$Json_Decode$string));
-														},
-														A2(_elm_lang$core$Json_Decode$field, 'token', _elm_lang$core$Json_Decode$string));
-												},
-												A2(_elm_lang$core$Json_Decode$field, 'quote', _elm_lang$core$Json_Decode$string));
-										},
-										A2(_elm_lang$core$Json_Decode$field, 'protectedQuote', _elm_lang$core$Json_Decode$string));
-								},
-								A2(_elm_lang$core$Json_Decode$field, 'password', _elm_lang$core$Json_Decode$string));
-						},
-						A2(_elm_lang$core$Json_Decode$field, 'errorMsg', _elm_lang$core$Json_Decode$string))),
-				_1: {ctor: '[]'}
-			}
-		}));
+	})();
+var _user$project$Main$GetQuote = {ctor: 'GetQuote'};
