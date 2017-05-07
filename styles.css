@@ -30,3 +30,11 @@ google-map {
 	height: 400px;
 	margin: 10px;
 }
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    margin:0 auto;
+}
