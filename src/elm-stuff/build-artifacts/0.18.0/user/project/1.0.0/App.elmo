@@ -1,0 +1,399 @@
+var _user$project$App$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'SetUsername':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{username: _p0._0});
+			case 'SetPassword':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{password: _p0._0});
+			case 'ClickRegisterUser':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{errorMsg: ''});
+			case 'ClickLogIn':
+				return (_elm_lang$core$Native_Utils.eq(model.username, 'Ajay') && _elm_lang$core$Native_Utils.eq(model.password, '1234')) ? _elm_lang$core$Native_Utils.update(
+					model,
+					{errorMsg: '', screen: '2'}) : _elm_lang$core$Native_Utils.update(
+					model,
+					{errorMsg: 'Invalid user and Password', screen: '1'});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{username: '', password: '', screen: '1'});
+		}
+	});
+var _user$project$App$checkUser = function (model) {
+	return model;
+};
+var _user$project$App$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {username: a, password: b, email: c, phno: d, role: e, tags: f, errorMsg: g, screen: h};
+	});
+var _user$project$App$init = A8(_user$project$App$Model, '', '', '', '', '', '', '', '1');
+var _user$project$App$user1 = A8(_user$project$App$Model, 'Ajay', '1234', 'ajay@gmail.com', '789654123', 'teacher', 'java, c, c++', '', '1');
+var _user$project$App$user2 = A8(_user$project$App$Model, 'Jeorge', '1234', 'jeorge@gmail.com', '789654123', 'seeker', 'java', '', '1');
+var _user$project$App$user3 = A8(_user$project$App$Model, 'Hussain', '1234', 'hussain@gmail.com', '789654123', 'teacher', 'javascript, html', '', '1');
+var _user$project$App$user4 = A8(_user$project$App$Model, 'Javed', '1234', 'javed@gmail.com', '789654123', 'teacher', 'python', '', '1');
+var _user$project$App$userList = {
+	ctor: '::',
+	_0: _user$project$App$user1,
+	_1: {
+		ctor: '::',
+		_0: _user$project$App$user2,
+		_1: {
+			ctor: '::',
+			_0: _user$project$App$user3,
+			_1: {
+				ctor: '::',
+				_0: _user$project$App$user4,
+				_1: {ctor: '[]'}
+			}
+		}
+	}
+};
+var _user$project$App$LogOut = {ctor: 'LogOut'};
+var _user$project$App$secondPage = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('jumbotron text-center'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('hello world'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('text-center'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$button,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('btn btn-primary'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(_user$project$App$LogOut),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Logout'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$App$ClickLogIn = {ctor: 'ClickLogIn'};
+var _user$project$App$ClickRegisterUser = {ctor: 'ClickRegisterUser'};
+var _user$project$App$SetPassword = function (a) {
+	return {ctor: 'SetPassword', _0: a};
+};
+var _user$project$App$SetUsername = function (a) {
+	return {ctor: 'SetUsername', _0: a};
+};
+var _user$project$App$loginPage = function (model) {
+	var showError = _elm_lang$core$String$isEmpty(model.errorMsg) ? 'hidden' : '';
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('jumbotron text-left'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$id('form'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$h2,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('text-center'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Log In'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$p,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('text-center help-block'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Please Log In.'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class(showError),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('alert alert-danger'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(model.errorMsg),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('form-group row'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('col-md-offset-2 col-md-8'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$label,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$for('username'),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Username:'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$input,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$id('username'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$type_('text'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('form-control'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$value(model.username),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetUsername),
+																					_1: {ctor: '[]'}
+																				}
+																			}
+																		}
+																	}
+																},
+																{ctor: '[]'}),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('form-group row'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$div,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('col-md-offset-2 col-md-8'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$label,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$for('password'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Password:'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$input,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$id('password'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$type_('password'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$class('form-control'),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$value(model.password),
+																					_1: {
+																						ctor: '::',
+																						_0: _elm_lang$html$Html_Events$onInput(_user$project$App$SetPassword),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	},
+																	{ctor: '[]'}),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('text-center'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$button,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('btn btn-primary'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Events$onClick(_user$project$App$ClickLogIn),
+																	_1: {ctor: '[]'}
+																}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Log In'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$App$view = function (model) {
+	var _p1 = model.screen;
+	switch (_p1) {
+		case '1':
+			return _user$project$App$loginPage(model);
+		case '2':
+			return _user$project$App$secondPage(model);
+		case '3':
+			return _user$project$App$loginPage(model);
+		default:
+			return _elm_lang$core$Native_Utils.crashCase(
+				'App',
+				{
+					start: {line: 102, column: 5},
+					end: {line: 106, column: 32}
+				},
+				_p1)('Help');
+	}
+};
+var _user$project$App$main = _elm_lang$html$Html$beginnerProgram(
+	{model: _user$project$App$init, view: _user$project$App$view, update: _user$project$App$update})();
+var _user$project$App$Three = {ctor: 'Three'};
+var _user$project$App$Two = {ctor: 'Two'};
+var _user$project$App$One = {ctor: 'One'};
