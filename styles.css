@@ -24,7 +24,7 @@ table {
 th, td{
 	/*border-bottom: 1px solid #ddd;*/
 	padding: 15px;
-    text-align: center;
+    text-align: left;
 }
 google-map {
 	height: 400px;

@@ -39,12 +39,16 @@ init =
     Model "Ajay" "1234" "" "" "" "" "" "1" ""
 
 -- Array of defualt users
-user1 = Model "Ajay" "1234" "ajay@gmail.com" "+91789654123" "teacher" "Java, C, C++" "" "1" ""
-user2 = Model "Jeorge" "1234" "jeorge@gmail.com" "+91789654123" "seeker" "Java" "" "1" ""
-user3 = Model "Hussain" "1234" "hussain@gmail.com" "+91789654123" "teacher" "Javascript, HTML, ELM, Haskell" "" "1" ""
-user4 = Model "Javed" "1234" "javed@gmail.com" "+918892585434" "teacher" "Python, R" "" "1" ""
+user1 = Model "Ajay" "1234" "ajay@gmail.com" "+91789654123" "Tutor" "Java, C, C++" "" "1" ""
+user2 = Model "Jeorge" "1234" "jeorge@gmail.com" "+91789654123" "Seeker" "Java" "" "1" ""
+user3 = Model "Hussain" "1234" "hussain@gmail.com" "+91789654123" "Tutor" "Javascript, HTML, ELM, Haskell" "" "1" ""
+user4 = Model "Javed" "1234" "javed@gmail.com" "+918892585434" "Tutor" "Python, R" "" "1" ""
+user5 = Model "Ajith" "1234" "ajith@udemy.com" "+918852365434" "Tutor" "Python, Ruby Rails" "" "1" ""
+user6 = Model "Smith" "1234" "smith@udemy.com" "+919652385434" "Seeker" "Django, Flask" "" "1" ""
+user7 = Model "Ritesh" "1234" "ritesh@edx.com" "+919652365412" "Seeker" "Ruby, R, Java" "" "1" ""
 
-userList = [user1, user2, user3, user4]
+
+userList = [user1, user2, user3, user4, user5, user6, user7]
 
 
 --check whether given user is already present in user list
@@ -56,6 +60,7 @@ checkUser models name pass =
             if x.username == name && x.password == pass
             then True
             else checkUser xs name pass
+
 
 
 --get user details for the given user
@@ -87,6 +92,17 @@ validateUser model =
                 Regex.contains patternEmail model.email
     then True
     else False
+
+--add new user to the list of users
+appendUser : Model -> Bool
+appendUser model = 
+    if List.isEmpty (append model) 
+    then False
+    else True
+
+append : Model -> List Model
+append model =
+    model::userList
 
 -- Messages 
 type Msg = SetUsername String
@@ -134,8 +150,8 @@ update msg model =
         ClickRegister -> 
             if checkUser userList model.username model.password
             then { model | errorMsg = "Username taken.", screen = "0" }
-            else if validateUser model
-            then { model | errorMsg = "", screen = "2" }
+            else if validateUser model && appendUser model
+            then { model | errorMsg = "", screen = "2"}
             else { model | errorMsg = "Enter all details correctly.", screen = "0" }
 
         LogInUserPage ->
@@ -266,8 +282,8 @@ signUpPage model =
                     , div [ class "form-group row" ]
                     [ div [ class "col-md-offset-2 col-md-8" ]
                     [ label [ for "role" ] [ text "Role:   " ]
-                    , input [ id "role", type_ "radio", class "", name "role", Html.Attributes.value "Teacher", checked True] []
-                    , text " Teacher  "
+                    , input [ id "role", type_ "radio", class "", name "role", Html.Attributes.value "Tutor", checked True] []
+                    , text " Tutor  "
                     , input [ id "role", type_ "radio", class "", name "role", Html.Attributes.value "Seeker" ] []
                     , text " Seeker  "
                     ]
@@ -291,13 +307,38 @@ mapWrapper : List (Attribute a) -> List (Html a) -> Html a
 mapWrapper =
     Html.node "map-wrapper"
 
+--dynamically generate UI for each user
+renderUI : Model -> Html Msg
+renderUI model =
+    let 
+        showtutor = 
+            if model.role == "Tutor"
+            then ""
+            else "hidden"
+
+        showseeker = 
+            if model.role == "Seeker"
+            then ""
+            else "hidden"
+    in
+    a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser model.username)] 
+        [ h4 [] [ text (model.username ++ "  (" ++ model.role ++ ")") ]
+        , p [ class showtutor] [ text ("Courses : " ++ model.tags)]
+        , p [ class showseeker] [ text ("Interested In : " ++ model.tags)]
+        ]
+
+--map each user in list to the renderUI function to render individual HTML
+renderUsers : List Model -> Html Msg
+renderUsers models =
+  let
+    ui = List.map renderUI models
+  in
+    div [class "list-group"] ui
+
 
 --second page view, page where nearby users are displayed
 secondPage : Model -> Html Msg
 secondPage model = 
-    let 
-        loggedUser = model.username
-    in
     div [ class "container" ] 
         [ div [ class "row"] [ navbar model.username ]
         , div [ class "col-xs-12 col-md-6"] 
@@ -307,27 +348,8 @@ secondPage model =
                 ]
                 []
             ]
-            , div [ class "col-xs-12 col-md-6" ]
-                [ div [ class "row col-xs-12 col-md-12"] 
-                    [ div [class "list-group"] 
-                        [ a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser "Ajay")] 
-                            [ h4 [] [ text "Ajay (Teacher)" ]
-                            , p [] [ text "Courses : Java, C, C++"]
-                            ]
-                        , a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser "Jeorge") ] 
-                            [ h4 [] [ text "Jeorge (Seeker)" ]
-                            , p [] [ text "Courses : Java"]
-                            ]
-                        , a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser "Hussain") ] 
-                            [ h4 [] [ text "Hussain (Teacher)" ]
-                            , p [] [ text "Interested in : Javascript, HTML, ELM, Haskell"]
-                            ]
-                        , a [class "list-group-item list-group-item-action align-items-start", onClick (ClickUser "Javed") ] 
-                            [ h4 [] [ text "Javed (Teacher)" ]
-                            , p [] [ text "Courses : Python, R"]
-                            ]
-                        ]
-                ]
+        , div [ class "col-xs-12 col-md-6" ]
+            [ div [ class "row col-xs-12 col-md-12"] [ renderUsers userList ]
             ]
         ]
 
@@ -339,28 +361,29 @@ thirdPage model =
         member = 
             getUser userList model.checkout
 
-        showteacher = 
-            if member.role == "teacher"
+        showtutor = 
+            if member.role == "Tutor"
             then ""
             else "hidden"
 
         showseeker = 
-            if member.role == "seeker"
+            if member.role == "Seeker"
             then ""
             else "hidden"
     in
     div [ class "container" ] 
         [ div [ class "row"] [ navbar model.username ]
-        , div [ class "row"]
-            [ h2 [ class "jumbotron"] [ text model.checkout ] ]
+        --, div [ class "row"]
+        --    [ h2 [ class "jumbotron"] [ text model.checkout ] ]
         , div [ class "row" ]
             [ div [class "col-md-6"] 
-                [ div [ class "" ] 
-                    [   table [ style [("cell-padding", "10px")]] 
+                [ div [ class "jumbotron" ] 
+                    [ h2 [ style [("padding-left", "10px")] ] [ text model.checkout ]
+                    , table [ style [("cell-padding", "10px")]] 
                             [   tr [] 
-                                    [ td [class showteacher] [ h4 [] [text "Teaches : " ]]
+                                    [ td [class showtutor] [ h4 [] [text "Teaches : " ]]
                                     , td [class showseeker] [ h4 [] [text "Interested In : "]]
-                                    , td [] [ h5 [] [text member.tags] ]
+                                    , td [] [ h5 [ style [("padding-left", "10px")] ] [text member.tags] ]
                                     ]
                             ,   tr []
                                     [   td [] [ h4 [] [ text "Contact : "]  ] 
